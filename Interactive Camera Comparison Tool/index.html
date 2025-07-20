@@ -1,0 +1,142 @@
+<!-- Project 5: Interactive Camera Comparison Tool -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Comparison Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .compare-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 300px;
+      padding: 20px;
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .wishlist-btn {
+      background: #1f2937;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Compare Cameras</h1>
+  <div class="compare-container">
+    <div class="card">
+      <select id="camera1" onchange="updateComparison()">
+        <option value="0">CCTV Pro</option>
+        <option value="1">Night Vision Max</option>
+        <option value="2">Smart Dome Cam</option>
+      </select>
+      <img id="img1" src="https://via.placeholder.com/300x180?text=CCTV+Pro">
+      <table>
+        <tbody id="specs1"></tbody>
+      </table>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+
+    <div class="card">
+      <select id="camera2" onchange="updateComparison()">
+        <option value="1">Night Vision Max</option>
+        <option value="0">CCTV Pro</option>
+        <option value="2">Smart Dome Cam</option>
+      </select>
+      <img id="img2" src="https://via.placeholder.com/300x180?text=Night+Vision+Max">
+      <table>
+        <tbody id="specs2"></tbody>
+      </table>
+      <button class="wishlist-btn">Contact to Buy</button>
+    </div>
+  </div>
+
+  <script>
+    const cameras = [
+      {
+        name: "CCTV Pro",
+        image: "https://via.placeholder.com/300x180?text=CCTV+Pro",
+        specs: {
+          Resolution: "1080p",
+          NightVision: "Yes",
+          Wireless: "No",
+          Price: "$120"
+        }
+      },
+      {
+        name: "Night Vision Max",
+        image: "https://via.placeholder.com/300x180?text=Night+Vision+Max",
+        specs: {
+          Resolution: "4K",
+          NightVision: "Yes",
+          Wireless: "Yes",
+          Price: "$200"
+        }
+      },
+      {
+        name: "Smart Dome Cam",
+        image: "https://via.placeholder.com/300x180?text=Smart+Dome+Cam",
+        specs: {
+          Resolution: "2K",
+          NightVision: "Yes",
+          Wireless: "Yes",
+          Price: "$150"
+        }
+      }
+    ];
+
+    function updateComparison() {
+      const cam1 = cameras[document.getElementById('camera1').value];
+      const cam2 = cameras[document.getElementById('camera2').value];
+
+      document.getElementById('img1').src = cam1.image;
+      document.getElementById('img2').src = cam2.image;
+
+      document.getElementById('specs1').innerHTML = Object.entries(cam1.specs)
+        .map(([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`).join('');
+      document.getElementById('specs2').innerHTML = Object.entries(cam2.specs)
+        .map(([key, value]) => `<tr><td>${key}</td><td>${value}</td></tr>`).join('');
+    }
+
+    updateComparison();
+  </script>
+</body>
+</html>
+<!-- End Project 5 -->
